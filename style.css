@@ -5,6 +5,10 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.motion-ready .reveal{opacity:1;transform:none}}
 
 /* Revision 2: swipe carousel, staggered standards reveal, mobile reading size. */
+.case-slide .case-art img{height:520px;min-height:0;object-fit:cover;object-position:center}
+.footer-links{display:flex;gap:24px;align-items:center;flex-wrap:wrap;font-size:12px}
+.faq-coupon{display:inline-flex;margin-top:16px;border-bottom:1px solid #087d75;color:#087d75;font-size:14px;font-weight:750;min-height:44px;align-items:center}
+@media(max-width:760px){.case-slide .case-art img{height:260px}.footer-links{font-size:14px}.faq-coupon{font-size:16px}}
 .case-track{display:flex;position:relative;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;align-items:stretch;border-radius:14px}
 .case-track::-webkit-scrollbar{display:none}
 .case-slide{flex:0 0 100%;min-width:0;scroll-snap-align:start;scroll-snap-stop:always}
