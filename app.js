@@ -38,15 +38,23 @@ if(diagnosisCard){
 }
 
 const caseTrack=document.querySelector('.case-track');
+document.querySelectorAll('.case-detail-toggle').forEach(button=>button.addEventListener('click',()=>{
+  const expanded=button.getAttribute('aria-expanded')!=='true';
+  button.setAttribute('aria-expanded',String(expanded));
+  button.closest('.case-slide').classList.toggle('is-expanded',expanded);
+  button.innerHTML=expanded?'접기 <span aria-hidden="true">−</span>':'자세히 보기 <span aria-hidden="true">＋</span>';
+}));
 if(caseTrack){
   const slides=[...caseTrack.querySelectorAll('.case-slide')];
   const dots=[...document.querySelectorAll('[data-case-go]')];
   const prev=document.querySelector('[data-case-prev]');
   const next=document.querySelector('[data-case-next]');
   let current=0,frame=0;
+  const collapseOtherDetails=()=>slides.forEach((slide,index)=>{if(index!==current){slide.classList.remove('is-expanded');const button=slide.querySelector('.case-detail-toggle');if(button){button.setAttribute('aria-expanded','false');button.innerHTML='자세히 보기 <span aria-hidden="true">＋</span>'}}});
   const position=slide=>slide.getBoundingClientRect().left-caseTrack.getBoundingClientRect().left+caseTrack.scrollLeft;
   const sync=()=>{
     current=slides.reduce((best,slide,index)=>Math.abs(position(slide)-caseTrack.scrollLeft)<Math.abs(position(slides[best])-caseTrack.scrollLeft)?index:best,0);
+    collapseOtherDetails();
     prev.disabled=current===0;next.disabled=current===slides.length-1;
     dots.forEach((dot,index)=>dot.setAttribute('aria-current',String(index===current)));
     document.querySelector('.case-count').textContent=`${String(current+1).padStart(2,'0')} / ${String(slides.length).padStart(2,'0')}`;
