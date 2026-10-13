@@ -1,7 +1,10 @@
-# 내집배관솔루션 랜딩페이지 초안
+# 내집배관솔루션
 
-팀 검토용 반응형 랜딩페이지입니다. 기존 게임 저장소 및 Cloudflare와 연결되지 않습니다.
+PC·모바일 반응형 공식 랜딩페이지입니다. 게임은 별도 저장소로 유지합니다.
 
-공유 주소: https://hongdatcom.github.io/naejip-landing-draft/
+공식 주소: https://nzpipe.kr/
+게임: https://nzpipe.kr/game
 
-가격, 운영 정책 및 사례 사진은 최종 검토 전 초안입니다. 검색엔진에는 noindex를 지정했지만 공개 페이지입니다.
+main 변경은 Cloudflare Pages에 자동 배포됩니다. nzpipe-router Worker가 메인/게임 경로를 분리합니다.
+검색 수집 허용, canonical, 사이트맵, Organization·WebSite·Service·FAQPage JSON-LD를 제공합니다.
+네이버 서치어드바이저 및 Google Search Console 소유 확인/사이트맵 제출은 계정에서 별도 진행합니다.
