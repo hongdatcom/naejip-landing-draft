@@ -38,6 +38,17 @@ if(diagnosisCard){
 }
 
 const caseTrack=document.querySelector('.case-track');
+const priceButton=document.querySelector('.price-jump');
+const priceGuide=document.querySelector('#price-guide');
+if(priceButton&&priceGuide){
+  priceButton.addEventListener('click',()=>{
+    const expanded=priceButton.getAttribute('aria-expanded')!=='true';
+    priceButton.setAttribute('aria-expanded',String(expanded));
+    priceButton.textContent=expanded?'전체 작업 가격표 접기 ↑':'전체 작업 가격표 보기 ↓';
+    priceGuide.hidden=!expanded;
+    if(expanded)priceGuide.scrollIntoView({block:'start',behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+  });
+}
 if(caseTrack){
   const slides=[...caseTrack.querySelectorAll('.case-slide')];
   const dots=[...document.querySelectorAll('[data-case-go]')];

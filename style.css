@@ -38,6 +38,8 @@
 .price-preview span{font-size:15px;font-weight:650}.price-preview strong{font-size:21px;white-space:nowrap}
 .price-jump{display:inline-flex;align-items:center;min-height:44px;font-size:14px;font-weight:750;margin-top:16px;color:#087d75}
 .price-guide{grid-column:1/-1;scroll-margin-top:90px}
+.price-guide[hidden]{display:none}
+.price-jump{border:0;background:transparent;padding:0;text-align:left}
 .price-heading{margin-bottom:24px}.price-heading h3{font-size:26px;margin-bottom:8px}.price-heading p{font-size:15px;color:var(--gray)}
 .price-category{border:1px solid var(--line);border-radius:10px;background:white;margin-top:12px;overflow:hidden}
 .price-category summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:22px 26px;background:var(--navy);color:white;font-size:18px;font-weight:750;cursor:pointer;list-style:none}
