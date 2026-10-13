@@ -5,6 +5,9 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.motion-ready .reveal{opacity:1;transform:none}}
 
 /* Revision 2: swipe carousel, staggered standards reveal, mobile reading size. */
+/* Sentence boundaries are explicit on mobile, while desktop remains inline. */
+.reading-unit,.meaning-unit{display:inline}
+@media(max-width:760px){main p{text-wrap:pretty;overflow-wrap:break-word}.reading-unit,.meaning-unit{display:block}.reading-unit+.reading-unit{margin-top:.5em}}
 /* Only the original horizontal graphic is replaced; its card and controls stay intact. */
 .flow-demo.pipe-cutaway{height:auto;border:0;margin:14px 0;border-radius:8px;background:linear-gradient(180deg,#f5fafb,#edf5f7)}
 .pipe-cutaway svg{display:block;width:100%;height:auto;max-height:108px}
