@@ -5,6 +5,23 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.motion-ready .reveal{opacity:1;transform:none}}
 
 /* Revision 2: swipe carousel, staggered standards reveal, mobile reading size. */
+.cost-grid{row-gap:36px}
+.price-preview>div{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;border-bottom:1px solid var(--line)}
+.price-preview span{font-size:15px;font-weight:650}.price-preview strong{font-size:21px;white-space:nowrap}
+.price-jump{display:inline-flex;align-items:center;min-height:44px;font-size:14px;font-weight:750;margin-top:16px;color:#087d75}
+.price-guide{grid-column:1/-1;scroll-margin-top:90px}
+.price-heading{margin-bottom:24px}.price-heading h3{font-size:26px;margin-bottom:8px}.price-heading p{font-size:15px;color:var(--gray)}
+.price-category{border:1px solid var(--line);border-radius:10px;background:white;margin-top:12px;overflow:hidden}
+.price-category summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:22px 26px;background:var(--navy);color:white;font-size:18px;font-weight:750;cursor:pointer;list-style:none}
+.price-category summary::-webkit-details-marker{display:none}
+.price-toggle:after{content:'+';font-size:24px;color:var(--mint)}.price-category[open] .price-toggle:after{content:'−'}
+.price-list{padding:8px 26px}
+.price-row{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:24px;row-gap:6px;padding:22px 0;border-bottom:1px solid var(--line)}
+.price-row:last-child{border-bottom:0}.price-row h4{font-size:17px;line-height:1.5;margin:0;font-weight:750}.price-row strong{font-size:18px;line-height:1.5;text-align:right}
+.price-row p{grid-column:1/-1;font-size:14px;color:var(--gray);line-height:1.75}
+.price-agreement{font-size:14px;color:#087d75;font-weight:700;line-height:1.8;margin-top:22px}
+@media(max-width:760px){.price-preview span{font-size:17px}.price-preview strong{font-size:20px}.price-jump{font-size:16px}.price-heading p,.price-agreement{font-size:16px}.price-category summary{padding:20px;font-size:17px}.price-list{padding:6px 20px}.price-row{grid-template-columns:1fr;row-gap:8px}.price-row strong{text-align:left;font-size:19px;color:#087d75}.price-row h4{font-size:18px}.price-row p{font-size:16px}}
+@media(max-width:360px){.price-preview>div{align-items:flex-start;flex-direction:column;gap:6px}}
 .case-slide .case-art img{height:520px;min-height:0;object-fit:cover;object-position:center}
 .footer-links{display:flex;gap:24px;align-items:center;flex-wrap:wrap;font-size:12px}
 .faq-coupon{display:inline-flex;margin-top:16px;border-bottom:1px solid #087d75;color:#087d75;font-size:14px;font-weight:750;min-height:44px;align-items:center}
