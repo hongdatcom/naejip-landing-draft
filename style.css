@@ -5,6 +5,31 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.motion-ready .reveal{opacity:1;transform:none}}
 
 /* Revision 2: swipe carousel, staggered standards reveal, mobile reading size. */
+/* Only the original horizontal graphic is replaced; its card and controls stay intact. */
+.flow-demo.pipe-cutaway{height:auto;border:0;margin:14px 0;border-radius:8px;background:linear-gradient(180deg,#f5fafb,#edf5f7)}
+.pipe-cutaway svg{display:block;width:100%;height:auto;max-height:108px}
+.pipe-cutaway .pipe-flow{animation:nz-pipe-flow 2.7s linear infinite}
+.pipe-cutaway .pipe-probe{animation:nz-pipe-probe 3s ease-in-out infinite}
+.pipe-cutaway .pipe-ring{animation:nz-pipe-ring 2s ease-out infinite;transform-origin:350px 116px}
+.pipe-cutaway .pipe-deposit{transition:opacity 1s,transform 1s;transform-origin:354px 137px}
+.pipe-cutaway .pipe-tool{display:none;animation:nz-pipe-tool 2s ease-in-out infinite}
+.pipe-cutaway .pipe-jet{stroke-dasharray:9 8;animation:nz-pipe-jet .6s linear infinite}
+.pipe-cutaway .pipe-clear-flow{opacity:.12;transition:opacity 1s}
+.pipe-cutaway .pipe-upstream{transition:opacity 1s}
+.diagnosis-card[data-stage='1'] .pipe-tool{display:block}
+.diagnosis-card[data-stage='1'] .pipe-probe,.diagnosis-card[data-stage='1'] .pipe-ring,.diagnosis-card[data-stage='2'] .pipe-probe,.diagnosis-card[data-stage='2'] .pipe-ring{display:none}
+.diagnosis-card[data-stage='1'] .pipe-deposit{animation:nz-pipe-remove 4s ease-in-out infinite}
+.diagnosis-card[data-stage='2'] .pipe-deposit{transform:scale(.05);opacity:0}
+.diagnosis-card[data-stage='2'] .pipe-clear-flow{opacity:1}
+.diagnosis-card[data-stage='2'] .pipe-upstream{opacity:0}
+.work-photo[data-stage='1'] img,.work-photo[data-stage='2'] img{object-fit:contain;object-position:center;background:var(--deep)}
+@keyframes nz-pipe-flow{to{stroke-dashoffset:-100}}
+@keyframes nz-pipe-probe{0%,100%{transform:translateX(-35px)}50%{transform:translateX(0)}}
+@keyframes nz-pipe-ring{0%{opacity:.6;transform:scale(.6)}100%{opacity:0;transform:scale(1.5)}}
+@keyframes nz-pipe-tool{50%{transform:translateX(10px)}}
+@keyframes nz-pipe-jet{to{stroke-dashoffset:-34}}
+@keyframes nz-pipe-remove{0%,100%{transform:scale(1);opacity:1}75%{transform:scale(.28);opacity:.2}}
+@media(prefers-reduced-motion:reduce){.diagnosis-card[data-stage='1'] .pipe-deposit{transform:scale(.6);opacity:.6}}
 .cost-grid{row-gap:36px}
 .price-preview>div{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;border-bottom:1px solid var(--line)}
 .price-preview span{font-size:15px;font-weight:650}.price-preview strong{font-size:21px;white-space:nowrap}
