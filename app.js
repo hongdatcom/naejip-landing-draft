@@ -11,7 +11,8 @@ const diagnosisCard=document.querySelector('.diagnosis-card');
 if(diagnosisCard){
   const stageButtons=[...diagnosisCard.querySelectorAll('[data-step]')];
   const stagePhoto=document.querySelector('.work-photo img');
-  const photoSources=['assets/work.jpg','assets/stage-2-v5.jpg','assets/stage-3-v5.jpg'];
+  const photoSources=['assets/work-20261116-960.webp','assets/stage-2-v5-20261116-960.webp','assets/stage-3-v5-20261116-960.webp'];
+  const photoSet=src=>src.replace('-960.webp','-480.webp')+' 480w, '+src+' 960w';
   const photoAlts=['내집배관솔루션 작업자가 천장 배관을 점검하는 모습','필요한 작업에 사용하는 고압세척·샤프트·내시경 장비','작업 후 배관 내부 상태를 확인하는 내시경 화면'];
   const motionPreference=window.matchMedia('(prefers-reduced-motion: reduce)');
   let stage=0,timer=null,inView=false,hovered=false;
@@ -22,11 +23,14 @@ if(diagnosisCard){
     stage=step;diagnosisCard.dataset.stage=String(step);
     stageButtons.forEach((b,i)=>{b.classList.toggle('active',i===step);b.setAttribute('aria-pressed',String(i===step))});
     diagnosisCard.querySelector('#step-copy').textContent=descriptions[step];
-    stagePhoto.src=photoSources[step];stagePhoto.alt=photoAlts[step];
+    stagePhoto.srcset=photoSet(photoSources[step]);stagePhoto.src=photoSources[step];stagePhoto.alt=photoAlts[step];
     stagePhoto.closest('.work-photo').dataset.stage=String(step);
   };
-  // Warm the two replacement photos without changing the initial field photo.
-  photoSources.slice(1).forEach(src=>{const img=new Image();img.src=src;img.decode().catch(()=>{})});
+  // Warm only the next photo after the hero has loaded and the browser is idle.
+  // Do not compete with the initial hero image on slow/mobile connections.
+  const warmNext=()=>{if(!inView||document.hidden||navigator.connection?.saveData||/2g/.test(navigator.connection?.effectiveType||''))return;const img=new Image();img.sizes=stagePhoto.sizes;img.srcset=photoSet(photoSources[(stage+1)%3]);img.src=photoSources[(stage+1)%3];img.decode().catch(()=>{})};
+  const idleWarm=()=>{if('requestIdleCallback' in window)requestIdleCallback(warmNext,{timeout:4000});else setTimeout(warmNext,2500)};
+  if(stagePhoto.complete&&stagePhoto.naturalWidth)idleWarm();else stagePhoto.addEventListener('load',idleWarm,{once:true});
   stageButtons.forEach(button=>button.addEventListener('click',()=>{stop();setStage(Number(button.dataset.step));schedule()}));
   diagnosisCard.addEventListener('mouseenter',()=>{hovered=true;stop()});
   diagnosisCard.addEventListener('mouseleave',()=>{hovered=false;schedule()});
