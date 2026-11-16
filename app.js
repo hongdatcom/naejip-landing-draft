@@ -28,9 +28,10 @@ if(diagnosisCard){
   };
   // Warm only the next photo after the hero has loaded and the browser is idle.
   // Do not compete with the initial hero image on slow/mobile connections.
-  const warmNext=()=>{if(!inView||document.hidden||navigator.connection?.saveData||/2g/.test(navigator.connection?.effectiveType||''))return;const img=new Image();img.sizes=stagePhoto.sizes;img.srcset=photoSet(photoSources[(stage+1)%3]);img.src=photoSources[(stage+1)%3];img.decode().catch(()=>{})};
+  const warmNext=()=>{if(!inView||!stagePhoto.complete||!stagePhoto.naturalWidth||document.hidden||navigator.connection?.saveData||/2g/.test(navigator.connection?.effectiveType||''))return;const img=new Image();img.sizes=stagePhoto.sizes;img.srcset=photoSet(photoSources[(stage+1)%3]);img.src=photoSources[(stage+1)%3];img.decode().catch(()=>{})};
   const idleWarm=()=>{if('requestIdleCallback' in window)requestIdleCallback(warmNext,{timeout:4000});else setTimeout(warmNext,2500)};
-  if(stagePhoto.complete&&stagePhoto.naturalWidth)idleWarm();else stagePhoto.addEventListener('load',idleWarm,{once:true});
+  stagePhoto.addEventListener('load',idleWarm);
+  if(stagePhoto.complete&&stagePhoto.naturalWidth)idleWarm();
   stageButtons.forEach(button=>button.addEventListener('click',()=>{stop();setStage(Number(button.dataset.step));schedule()}));
   diagnosisCard.addEventListener('mouseenter',()=>{hovered=true;stop()});
   diagnosisCard.addEventListener('mouseleave',()=>{hovered=false;schedule()});
@@ -38,7 +39,7 @@ if(diagnosisCard){
   diagnosisCard.addEventListener('focusout',()=>setTimeout(schedule,0));
   document.addEventListener('visibilitychange',schedule);
   motionPreference.addEventListener('change',schedule);
-  if('IntersectionObserver' in window){const stageObserver=new IntersectionObserver(entries=>{inView=entries[0].isIntersecting;schedule()},{threshold:.25});stageObserver.observe(diagnosisCard)}
+  if('IntersectionObserver' in window){const stageObserver=new IntersectionObserver(entries=>{inView=entries[0].isIntersecting;if(inView)idleWarm();schedule()},{threshold:.25});stageObserver.observe(diagnosisCard)}
 }
 
 const caseTrack=document.querySelector('.case-track');
